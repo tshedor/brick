@@ -12,11 +12,9 @@ class QuerySupabaseTransformer<_Model extends SupabaseModel> {
 
   final SupabaseModelDictionary modelDictionary;
 
-  /// Must-haves for the [statement], mainly used to build clauses
+  /// Must-haves for the [select], mainly used to build clauses
   final Query? query;
 
-  /// [selectStatement] will output [statement] as a `SELECT FROM`. When false, the [statement]
-  /// output will be a `SELECT COUNT(*)`. Defaults `true`.
   QuerySupabaseTransformer({
     required this.modelDictionary,
     this.query,
@@ -31,6 +29,7 @@ class QuerySupabaseTransformer<_Model extends SupabaseModel> {
     PostgrestFilterBuilder<List<Map<String, dynamic>>> builder,
   ) {
     if (query?.providerArgs['orderBy'] != null) {
+      // ignore: parameter_assignments
       builder = order(builder);
     }
 

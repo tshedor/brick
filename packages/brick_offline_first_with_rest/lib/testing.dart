@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:brick_offline_first_with_rest/brick_offline_first_with_rest.dart';
+import 'package:brick_rest/brick_rest.dart';
 import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -120,7 +121,7 @@ class StubOfflineFirstWithRest {
   /// }
   /// ```
   ///
-  /// Responses will be returned on all HTTP methods. The [filePath] is
+  /// Responses will be returned on all HTTP methods. The `filePath` is
   /// **relative to the top-level /test directory**.
   factory StubOfflineFirstWithRest.fromFiles(
     String baseEndpoint,

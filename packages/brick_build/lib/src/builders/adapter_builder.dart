@@ -18,8 +18,7 @@ class AdapterBuilder<_ClassAnnotation> extends BaseBuilder<_ClassAnnotation> {
 
     final allOutputs = <String>[];
     for (final annotatedElement in annotatedElements) {
-      final stopwatch = Stopwatch();
-      stopwatch.start();
+      final stopwatch = Stopwatch()..start();
 
       final output = generator.generateAdapter(
         annotatedElement.element,

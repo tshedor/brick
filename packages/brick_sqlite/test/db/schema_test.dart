@@ -50,8 +50,8 @@ void main() {
       group('RenameTable', () {
         test('without a prior, relevant insert migration', () {
           expect(
-            () => Schema.fromMigrations({Migration0None(), renameTable}),
-            throwsA(TypeMatcher<StateError>()),
+            () => Schema.fromMigrations({const Migration0None(), renameTable}),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
@@ -83,13 +83,13 @@ void main() {
       group('DropTable', () {
         test('without a prior, relevant insert migration', () {
           expect(
-            () => Schema.fromMigrations({Migration0None(), dropTable}),
-            throwsA(TypeMatcher<StateError>()),
+            () => Schema.fromMigrations({const Migration0None(), dropTable}),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
         test('runs', () {
-          final schema = Schema(
+          const schema = Schema(
             3,
             tables: <SchemaTable>{},
           );
@@ -103,8 +103,8 @@ void main() {
       group('InsertColumn', () {
         test('without a prior, relevant InsertTable migration', () {
           expect(
-            () => Schema.fromMigrations({Migration0None(), insertColumn}),
-            throwsA(TypeMatcher<StateError>()),
+            () => Schema.fromMigrations({const Migration0None(), insertColumn}),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
@@ -137,15 +137,15 @@ void main() {
       group('RenameColumn', () {
         test('without a prior, relevant InsertTable migration', () {
           expect(
-            () => Schema.fromMigrations({Migration0None(), renameColumn}),
-            throwsA(TypeMatcher<StateError>()),
+            () => Schema.fromMigrations({const Migration0None(), renameColumn}),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
         test('without a prior, relevant InsertColumn migration', () {
           expect(
             () => Schema.fromMigrations({insertTable, renameColumn}),
-            throwsA(TypeMatcher<StateError>()),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
@@ -178,8 +178,8 @@ void main() {
       group('InsertForeignKey', () {
         test('without a prior, relevant InsertTable migration', () {
           expect(
-            () => Schema.fromMigrations({Migration0None(), insertForeignKey}),
-            throwsA(TypeMatcher<StateError>()),
+            () => Schema.fromMigrations({const Migration0None(), insertForeignKey}),
+            throwsA(const TypeMatcher<StateError>()),
           );
         });
 
@@ -301,33 +301,36 @@ void main() {
           },
         );
 
-        final newSchema = Schema.fromMigrations({insertTable, Migration2()});
+        final newSchema = Schema.fromMigrations({insertTable, const Migration2()});
         expect(newSchema.tables, schema.tables);
         expect(newSchema.version, schema.version);
       });
 
       test('version must be positive if provided', () {
         expect(
-          () => Schema.fromMigrations(<Migration>{}, -1),
+          () => Schema.fromMigrations(const <Migration>{}, -1),
           throwsA(const TypeMatcher<AssertionError>()),
         );
       });
 
       test("version uses the migrations' largest version if not provided", () {
-        expect(Schema.fromMigrations({Migration2(), Migration1()}).version, 2);
+        expect(Schema.fromMigrations({const Migration2(), const Migration1()}).version, 2);
       });
     });
 
     test('.expandMigrations', () {
-      final migrations = {MigrationInsertTable(), MigrationRenameColumn()};
+      final migrations = {const MigrationInsertTable(), const MigrationRenameColumn()};
 
       final commands = Schema.expandMigrations(migrations);
       // Maintains sort order
-      expect(commands, [InsertTable('demo'), RenameColumn('name', 'first_name', onTable: 'demo')]);
+      expect(
+        commands,
+        [const InsertTable('demo'), const RenameColumn('name', 'first_name', onTable: 'demo')],
+      );
     });
 
     test('#forGenerator', () {
-      final schema = Schema.fromMigrations({MigrationInsertTable(), Migration2()});
+      final schema = Schema.fromMigrations({const MigrationInsertTable(), const Migration2()});
 
       expect(schema.forGenerator, '''
 Schema(

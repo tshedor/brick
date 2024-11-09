@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:brick_core/src/model.dart';
-import 'package:brick_core/src/provider.dart';
-import 'package:brick_core/src/query/query.dart';
+import 'package:brick_core/core.dart';
 
 /// A Repository is the top-level means of relaying data between [Model]s and [Provider]s.
 /// A conventional implementation would adhere to the singleton pattern.
 ///
 /// It should handle the app's caching strategy between [Provider]s. For example, if an app has
 /// an offline-first caching strategy, the Repository first fetches from a `SqliteProvider`
-/// and then a `RestProvider` before returning one result. An app should have one [Repository] for
+/// and then a `RestProvider` before returning one result. An app should have one [ModelRepository] for
 /// one data flow (similar to having one Redux store as the source of truth).
 ///
 /// `implement`ing this class is not necessary. It's supplied as a standardized, opinionated way to

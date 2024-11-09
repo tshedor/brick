@@ -105,7 +105,7 @@ class SupabaseProvider implements Provider<SupabaseModel> {
     Query? query,
     ModelRepository<SupabaseModel>? repository,
   }) async {
-    assert(modelDictionary.adapterFor.containsKey(type));
+    assert(modelDictionary.adapterFor.containsKey(type), 'No adapter found for $type');
 
     final adapter = modelDictionary.adapterFor[type]!;
 
@@ -140,7 +140,7 @@ class SupabaseProvider implements Provider<SupabaseModel> {
     Query? query,
     ModelRepository<SupabaseModel>? repository,
   }) async {
-    assert(modelDictionary.adapterFor.containsKey(type));
+    assert(modelDictionary.adapterFor.containsKey(type), 'No adapter found for $type');
 
     final adapter = modelDictionary.adapterFor[type]!;
     final associations = adapter.fieldsToSupabaseColumns.values

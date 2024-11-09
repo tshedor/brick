@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, avoid_dynamic_calls, avoid_equals_and_hash_code_on_mutable_classes
 
 import 'dart:convert';
 
@@ -19,7 +19,7 @@ import 'package:brick_supabase/brick_supabase.dart';
 import 'package:sqflite_common/sqlite_api.dart' show DatabaseExecutor;
 
 @ConnectOfflineFirstWithSupabase(
-  supabaseConfig: SupabaseSerializable(),
+  supabaseConfig: SupabaseSerializable.defaults,
 )
 class Customer extends OfflineFirstWithSupabaseModel {
   @Sqlite(unique: true)
@@ -55,7 +55,7 @@ class Customer extends OfflineFirstWithSupabaseModel {
 }
 
 @ConnectOfflineFirstWithSupabase(
-  supabaseConfig: SupabaseSerializable(),
+  supabaseConfig: SupabaseSerializable.defaults,
 )
 class Pizza extends OfflineFirstWithSupabaseModel {
   /// Read more about `@Sqlite`: https://github.com/GetDutchie/brick/tree/main/packages/brick_sqlite#fields
@@ -211,7 +211,7 @@ class PizzaAdapter extends OfflineFirstWithSupabaseAdapter<Pizza> {
       return null;
     }
 
-    return results.first['_brick_id'] as int;
+    return results.first['_brick_id']! as int;
   }
 
   @override
@@ -401,7 +401,7 @@ class CustomerAdapter extends OfflineFirstWithSupabaseAdapter<Customer> {
       return null;
     }
 
-    return results.first['_brick_id'] as int;
+    return results.first['_brick_id']! as int;
   }
 
   @override

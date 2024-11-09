@@ -1,4 +1,5 @@
 import 'package:brick_core/core.dart';
+import 'package:brick_sqlite/db.dart';
 import 'package:brick_sqlite/src/models/sqlite_model.dart';
 import 'package:brick_sqlite/src/runtime_sqlite_column_definition.dart';
 import 'package:brick_sqlite/src/sqlite_provider.dart';

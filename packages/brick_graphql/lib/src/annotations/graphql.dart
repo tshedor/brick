@@ -1,4 +1,6 @@
 import 'package:brick_core/field_serializable.dart';
+import 'package:brick_graphql/brick_graphql.dart';
+import 'package:brick_graphql/src/graphql_adapter.dart';
 
 /// An annotation used to specify how a field is serialized for a [GraphqlAdapter].
 /// Heavily inspired by [JsonKey](https://github.com/dart-lang/json_serializable/blob/master/json_annotation/lib/src/json_key.dart)

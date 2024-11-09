@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:brick_rest/brick_rest.dart';
+import 'package:brick_rest/src/rest_provider.dart';
 import 'package:http/http.dart' as http;
 
 /// An error class exclusive to the [RestProvider]

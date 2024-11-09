@@ -1,4 +1,6 @@
 import 'package:brick_core/core.dart';
+import 'package:brick_graphql/brick_graphql.dart';
+import 'package:brick_graphql/src/graphql_provider.dart';
 
 /// This class should be subclassed for each model. For example:
 ///

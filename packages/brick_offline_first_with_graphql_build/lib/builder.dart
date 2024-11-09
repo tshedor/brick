@@ -17,13 +17,13 @@ class OfflineFirstSchemaBuilder extends SchemaBuilder<ConnectOfflineFirstWithGra
   final schemaGenerator = _schemaGenerator;
 }
 
-final offlineFirstGenerator = const OfflineFirstWithGraphqlGenerator(
+const offlineFirstGenerator = OfflineFirstWithGraphqlGenerator(
   superAdapterName: 'OfflineFirstWithGraphql',
   repositoryName: 'OfflineFirstWithGraphql',
 );
 
 /// These functions act as builder factories used by `build.yaml`
-Builder offlineFirstAggregateBuilder(options) => AggregateBuilder(
+Builder offlineFirstAggregateBuilder(options) => const AggregateBuilder(
       requiredImports: [
         "import 'package:brick_offline_first/brick_offline_first.dart';",
         "import 'package:brick_sqlite/db.dart';",

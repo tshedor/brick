@@ -29,7 +29,7 @@ class MemoryCacheProvider<TProviderModel extends SqliteModel> extends Provider<T
   bool manages(Type type) => managedModelTypes.contains(type);
 
   /// It is strongly recommended to use this provider with smaller, frequently-accessed
-  /// and shared [TModel]s.
+  /// and shared [TProviderModel]s.
   MemoryCacheProvider([
     this.managedModelTypes = const <Type>[],
   ]);
@@ -102,7 +102,7 @@ class MemoryCacheProvider<TProviderModel extends SqliteModel> extends Provider<T
     if (!manages(TModel)) return null;
     logger.finest('#upsert: $TModel, $instance, $query');
     hydrate<TModel>([instance]);
-    return managedObjects[TModel]![instance.primaryKey] as TModel;
+    return managedObjects[TModel]![instance.primaryKey]! as TModel;
   }
 }
 

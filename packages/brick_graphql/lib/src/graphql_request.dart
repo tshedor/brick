@@ -1,6 +1,5 @@
 import 'package:brick_core/core.dart';
-import 'package:brick_graphql/src/graphql_model.dart';
-import 'package:brick_graphql/src/graphql_model_dictionary.dart';
+import 'package:brick_graphql/brick_graphql.dart';
 import 'package:brick_graphql/src/transformers/model_fields_document_transformer.dart';
 import 'package:gql_exec/gql_exec.dart';
 
@@ -46,7 +45,7 @@ class GraphqlRequest<TModel extends GraphqlModel> {
               Map<String, ContextEntry>.from(query?.providerArgs['context'])
                   .map((key, value) => MapEntry<Type, ContextEntry>(value.runtimeType, value)),
             )
-          : Context(),
+          : const Context(),
     );
   }
 

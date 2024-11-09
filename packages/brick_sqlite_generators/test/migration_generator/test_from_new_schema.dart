@@ -37,7 +37,7 @@ final schema = Schema(
   },
 );
 
-final output = '''
+const output = '''
 // GENERATED CODE EDIT WITH CAUTION
 // THIS FILE **WILL NOT** BE REGENERATED
 // This file should be version controlled and can be manually edited.

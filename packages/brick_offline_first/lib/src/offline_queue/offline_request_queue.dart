@@ -45,7 +45,7 @@ abstract class OfflineRequestQueue<TRequest> {
     }
   }
 
-  /// Start the processing queue, resending requests every [interval].
+  /// Start the processing queue, resending requests every [processingInterval].
   /// Stops the existing timer if it was already running.
   void start() {
     stop();

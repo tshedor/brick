@@ -1,4 +1,4 @@
-import 'package:brick_core/core.dart' show Query, WhereCondition, Compare, WherePhrase;
+import 'package:brick_core/core.dart' show Compare, Query, WhereCondition, WherePhrase;
 import 'package:brick_sqlite/src/db/migration_commands/insert_foreign_key.dart';
 import 'package:brick_sqlite/src/db/migration_commands/insert_table.dart';
 import 'package:brick_sqlite/src/models/sqlite_model.dart';
@@ -260,7 +260,7 @@ class WhereColumnFragment {
   }
 
   @protected
-  dynamic sqlifiedValue(dynamic value, Compare compare) {
+  dynamic sqlifiedValue(value, Compare compare) {
     if (compare == Compare.contains || compare == Compare.doesNotContain) {
       return '%$value%';
     }

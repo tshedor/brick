@@ -134,7 +134,7 @@ void main() {
           .upsert<DemoModel>(DemoModel(name: 'Guy', manyAssoc: [DemoModelAssoc(name: 'Thomas')]));
       final query = Query(
         where: [const Where('manyAssoc').isExactly(const Where('name').isExactly('Thomas'))],
-        providerArgs: {'limit': 1, 'offset': 1},
+        providerArgs: const {'limit': 1, 'offset': 1},
       );
 
       final doesExistWithoutModel = await provider.exists<DemoModel>(query: query);

@@ -10,6 +10,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class Repository extends OfflineFirstWithSupabaseRepository {
   static late Repository? _singleton;
 
+  factory Repository() => _singleton!;
+
   Repository._({
     required super.supabaseProvider,
     required super.sqliteProvider,
@@ -17,8 +19,6 @@ class Repository extends OfflineFirstWithSupabaseRepository {
     required super.offlineRequestQueue,
     super.memoryCacheProvider,
   });
-
-  factory Repository() => _singleton!;
 
   static Future<void> initializeSupabaseAndConfigure({
     required String supabaseUrl,

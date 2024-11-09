@@ -1,3 +1,4 @@
+import 'package:brick_sqlite/db.dart';
 import 'package:brick_sqlite_generators/src/builders/sqlite_base_builder.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
@@ -11,8 +12,7 @@ class SchemaBuilder<_ClassAnnotation> extends SqliteBaseBuilder<_ClassAnnotation
 
   @override
   Future<void> build(BuildStep buildStep) async {
-    final stopwatch = Stopwatch();
-    stopwatch.start();
+    final stopwatch = Stopwatch()..start();
 
     final libraryReader = LibraryReader(await buildStep.inputLibrary);
     final fieldses = await sqliteFieldsFromBuildStep(buildStep);

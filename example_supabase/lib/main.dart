@@ -11,21 +11,23 @@ Future<void> main() async {
     supabaseAnonKey: supabaseAnonKey,
   );
   await Repository().initialize();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: TextTheme(
-          bodyMedium: TextStyle(fontSize: 20.0),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 20),
         ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final String title;
 
-  MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,11 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20),
         child: FutureBuilder(
+          // ignore: discarded_futures
           future: Repository().get<Pizza>(),
-          builder: (context, AsyncSnapshot<List<Pizza>> pizzaList) {
+          builder: (context, pizzaList) {
             final pizzas = pizzaList.data;
 
             return ListView.builder(
@@ -63,12 +66,11 @@ class MyHomePage extends StatelessWidget {
 class PizzaTile extends StatelessWidget {
   final Pizza pizza;
 
-  PizzaTile(this.pizza);
+  const PizzaTile(this.pizza, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text('id: ${pizza.id}'),
         Text('frozen: ${pizza.frozen}'),

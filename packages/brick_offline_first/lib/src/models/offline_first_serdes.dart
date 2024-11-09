@@ -7,8 +7,8 @@
 ///
 /// Type parameters **are required**. For [SqliteSerializeType] (second arg), these may be any of the
 /// following: `bool`, `DateTime`, `double`, `int`, `num`, `String`. [RemoteSerializeType]
-/// should support the same types in addition to `Iterable` and `Map`s digestible by [jsonEncode]
-/// and [jsonDecode] unless otherwise specified.
+/// should support the same types in addition to `Iterable` and `Map`s digestible by `jsonEncode`
+/// and `jsonDecode` unless otherwise specified.
 ///
 /// Declare `factory` methods `fromSqlite` and `from<REMOTE PROIVDER(s)>` (like `fromRest`) to deserialize.
 /// Both use one unnamed arg with a type post-`jsonDecode`.

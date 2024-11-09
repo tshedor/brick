@@ -5,7 +5,7 @@ import 'package:brick_offline_first/offline_queue.dart';
 import 'package:brick_offline_first_with_rest/src/models/offline_first_with_rest_model.dart';
 import 'package:brick_offline_first_with_rest/src/offline_queue/rest_offline_queue_client.dart';
 import 'package:brick_offline_first_with_rest/src/offline_queue/rest_offline_request_queue.dart';
-import 'package:brick_rest/brick_rest.dart' show RestProvider, RestException;
+import 'package:brick_rest/brick_rest.dart' show RestException, RestProvider;
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 

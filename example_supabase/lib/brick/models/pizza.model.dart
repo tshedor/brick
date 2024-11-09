@@ -4,7 +4,7 @@ import 'package:brick_supabase/brick_supabase.dart';
 import 'package:pizza_shoppe/brick/models/customer.model.dart';
 
 @ConnectOfflineFirstWithSupabase(
-  supabaseConfig: SupabaseSerializable(),
+  supabaseConfig: SupabaseSerializable.defaults,
 )
 class Pizza extends OfflineFirstWithSupabaseModel {
   /// Read more about `@Sqlite`: https://github.com/GetDutchie/brick/tree/main/packages/brick_sqlite#fields

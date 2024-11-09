@@ -1,6 +1,6 @@
 import 'package:brick_offline_first/src/offline_queue/request_sqlite_cache.dart';
 import 'package:meta/meta.dart';
-import 'package:sqflite_common/sqlite_api.dart' show Database, DatabaseFactory, DatabaseExecutor;
+import 'package:sqflite_common/sqlite_api.dart' show Database, DatabaseExecutor, DatabaseFactory;
 
 /// Fetch and delete [RequestSqliteCache]s.
 abstract class RequestSqliteCacheManager<RequestMethod> {
@@ -138,7 +138,7 @@ abstract class RequestSqliteCacheManager<RequestMethod> {
       tableName,
       distinct: true,
       where: '$lockedColumn = ? AND $createdAtColumn <= ?',
-      whereArgs: [whereLocked ? 1 : 0, nowMinusNextPoll],
+      whereArgs: [if (whereLocked) 1 else 0, nowMinusNextPoll],
       orderBy: orderByStatement,
       limit: 1,
     );

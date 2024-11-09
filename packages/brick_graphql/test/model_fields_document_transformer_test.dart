@@ -7,15 +7,18 @@ import 'package:test/test.dart';
 import '__helpers__/demo_model.dart';
 import '__mocks__.dart';
 
-const upsertPersonWithoutNodesHeader = r'''mutation UpsertPerson($input: UpsertPersonInput!) {
+const upsertPersonWithoutNodesHeader = r'''
+mutation UpsertPerson($input: UpsertPersonInput!) {
   upsertPerson(input: $input) {}
 }''';
 
-const upsertPersonWithoutArgumentsHeader = '''mutation UpsertPerson {
+const upsertPersonWithoutArgumentsHeader = '''
+mutation UpsertPerson {
   upsertPerson {}
 }''';
 
-const upsertPersonWithNodes = r'''mutation UpsertPerson($input: UpsertPersonInput!) {
+const upsertPersonWithNodes = r'''
+mutation UpsertPerson($input: UpsertPersonInput!) {
   upsertPerson(input: $input) {
     primaryKey
     id
@@ -28,7 +31,8 @@ const upsertPersonWithNodes = r'''mutation UpsertPerson($input: UpsertPersonInpu
   }
 }''';
 
-const upsertPersonWithoutArguments = '''mutation UpsertPerson {
+const upsertPersonWithoutArguments = '''
+mutation UpsertPerson {
   upsertPerson {
     primaryKey
     id
@@ -41,7 +45,8 @@ const upsertPersonWithoutArguments = '''mutation UpsertPerson {
   }
 }''';
 
-const subfields = '''query GetDemoAssocModels {
+const subfields = '''
+query GetDemoAssocModels {
   getDemoAssocModels {
     _brick_id
     full_name {
@@ -133,8 +138,9 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
 
     group('.defaultOperation', () {
       test('with specified document', () {
-        final query =
-            Query(providerArgs: {'operation': GraphqlOperation(document: upsertPersonWithNodes)});
+        final query = Query(
+          providerArgs: const {'operation': GraphqlOperation(document: upsertPersonWithNodes)},
+        );
         final transformer = ModelFieldsDocumentTransformer.defaultOperation<DemoModel>(
           dictionary,
           action: QueryAction.get,
@@ -142,7 +148,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
         );
         expect(
           lang.printNode(transformer!.document),
-          startsWith(r'''mutation UpsertPerson($input: UpsertPersonInput!) {
+          startsWith(r'''
+mutation UpsertPerson($input: UpsertPersonInput!) {
   upsertPerson(input: $input) {'''),
         );
       });
@@ -154,7 +161,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
         );
         expect(
           lang.printNode(transformer!.document),
-          startsWith(r'''mutation DeleteDemoModel($input: DemoModelInput!) {
+          startsWith(r'''
+mutation DeleteDemoModel($input: DemoModelInput!) {
   deleteDemoModel(input: $input) {'''),
         );
       });
@@ -166,7 +174,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
         );
         expect(
           lang.printNode(transformer!.document),
-          startsWith(r'''mutation UpsertDemoModels($input: DemoModelInput!) {
+          startsWith(r'''
+mutation UpsertDemoModels($input: DemoModelInput!) {
   upsertDemoModel(input: $input) {'''),
         );
       });
@@ -188,7 +197,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith('''query GetDemoModels {
+            startsWith('''
+query GetDemoModels {
   getDemoModels {'''),
           );
         });
@@ -201,7 +211,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith('''query GetDemoModels {
+            startsWith('''
+query GetDemoModels {
   getDemoModels {'''),
           );
         });
@@ -214,7 +225,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith(r'''query GetDemoModel($input: DemoModelFilterInput!) {
+            startsWith(r'''
+query GetDemoModel($input: DemoModelFilterInput!) {
   getDemoModel(input: $input) {'''),
           );
         });
@@ -228,7 +240,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith('''subscription GetDemoModels {
+            startsWith('''
+subscription GetDemoModels {
   getDemoModels {'''),
           );
         });
@@ -241,7 +254,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith('''subscription GetDemoModels {
+            startsWith('''
+subscription GetDemoModels {
   getDemoModels {'''),
           );
         });
@@ -254,7 +268,8 @@ mutation UpsertPerson($input: UpsertPersonInput!) {
           );
           expect(
             lang.printNode(transformer!.document),
-            startsWith(r'''subscription GetDemoModels($input: DemoModelInput!) {
+            startsWith(r'''
+subscription GetDemoModels($input: DemoModelInput!) {
   getDemoModels(input: $input) {'''),
           );
         });

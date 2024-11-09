@@ -14,7 +14,7 @@ void main() {
     final requestManager = RestRequestSqliteCacheManager(
       inMemoryDatabasePath,
       databaseFactory: databaseFactoryFfi,
-      processingInterval: const Duration(seconds: 0),
+      processingInterval: Duration.zero,
     );
 
     setUpAll(() async {
@@ -36,7 +36,7 @@ void main() {
         inMemoryDatabasePath,
         databaseFactory: databaseFactoryFfi,
         serialProcessing: false,
-        processingInterval: const Duration(seconds: 0),
+        processingInterval: Duration.zero,
       );
       final client = RestOfflineQueueClient(inner, requestManager);
 

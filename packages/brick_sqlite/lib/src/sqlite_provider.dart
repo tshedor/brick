@@ -71,7 +71,7 @@ class SqliteProvider<TProviderModel extends SqliteModel> implements Provider<TPr
 
   /// Returns `true` if [TModel] exists in SQLite.
   ///
-  /// If [query.where] is `null`, existence for **any** record is executed.
+  /// If [query]`.where` is `null`, existence for **any** record is executed.
   @override
   Future<bool> exists<TModel extends TProviderModel>({
     Query? query,
@@ -160,7 +160,7 @@ class SqliteProvider<TProviderModel extends SqliteModel> implements Provider<TPr
       return -1;
     }
 
-    return sqliteVersions.first['version'] as int;
+    return sqliteVersions.first['version']! as int;
   }
 
   /// Update database structure with latest migrations. Note that this will run
@@ -180,8 +180,8 @@ class SqliteProvider<TProviderModel extends SqliteModel> implements Provider<TPr
       return;
     }
 
-    for (var migration in migrations) {
-      for (var command in migration.up) {
+    for (final migration in migrations) {
+      for (final command in migration.up) {
         _logger.finer(
           'Running migration (${migration.version}): ${command.statement ?? command.forGenerator}',
         );

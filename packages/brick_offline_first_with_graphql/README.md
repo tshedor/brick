@@ -32,7 +32,7 @@ GraphqlProvider(
 
 ```dart
 @ConnectOfflineFirstWithGraphql(
-  graphqlConfig: GraphqlSerializable(),
+  graphqlConfig: GraphqlSerializable.defaults,
   sqliteConfig: SqliteSerializable(),
 )
 class MyModel extends OfflineFirstModel {}

@@ -42,11 +42,9 @@ class ModelFieldsDocumentTransformer<TModel extends GraphqlModel> {
                   name: NameNode(value: variable.className),
                   isNonNull: !variable.nullable,
                 ),
-                defaultValue: DefaultValueNode(value: null),
-                directives: [],
+                defaultValue: const DefaultValueNode(value: null),
               ),
           ],
-          directives: [],
           selectionSet: SelectionSetNode(
             selections: [
               FieldNode(
@@ -109,9 +107,6 @@ class ModelFieldsDocumentTransformer<TModel extends GraphqlModel> {
       nodes.add(
         FieldNode(
           name: NameNode(value: entry.value.documentNodeName),
-          alias: null,
-          arguments: [],
-          directives: [],
           selectionSet: entry.value.association && !ignoreAssociations
               ? SelectionSetNode(
                   selections: _generateNodes(
@@ -134,9 +129,6 @@ class ModelFieldsDocumentTransformer<TModel extends GraphqlModel> {
         acc.add(
           FieldNode(
             name: NameNode(value: entry.key),
-            alias: null,
-            arguments: [],
-            directives: [],
             selectionSet: entry.value.isEmpty ? null : _generateSubFields(entry.value),
           ),
         );

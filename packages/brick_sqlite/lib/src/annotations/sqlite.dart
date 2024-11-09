@@ -1,5 +1,5 @@
 import 'package:brick_core/field_serializable.dart';
-import 'package:brick_sqlite/src/db/migration.dart' show Column;
+import 'package:brick_sqlite/brick_sqlite.dart';
 
 export 'package:brick_sqlite/src/db/migration.dart' show Column;
 
@@ -62,7 +62,7 @@ class Sqlite implements FieldSerializable {
   @override
   final bool nullable;
 
-  /// When true, deletion of the referenced record by [foreignKeyColumn] on the [foreignTableName]
+  /// When true, deletion of the referenced record by `foreignKeyColumn` on the `foreignTableName`
   /// this record. For example, if the foreign table is "departments" and the local table
   /// is "employees," whenever that department is deleted, "employee"
   /// will be deleted. Defaults `false`.

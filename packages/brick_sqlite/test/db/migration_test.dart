@@ -121,8 +121,8 @@ class Migration1 extends Migration {
 
       test('multiple commands', () {
         final commands = [
-          InsertTable('demo'),
-          RenameColumn('first_name', 'last_name', onTable: 'people'),
+          const InsertTable('demo'),
+          const RenameColumn('first_name', 'last_name', onTable: 'people'),
         ];
 
         final output = Migration.generate(commands, 15);
@@ -170,8 +170,8 @@ class Migration15 extends Migration {
 
       test('null drop commands are not reported', () {
         final commands = [
-          DropColumn('first_name', onTable: 'people'),
-          DropColumn('last_name', onTable: 'people'),
+          const DropColumn('first_name', onTable: 'people'),
+          const DropColumn('last_name', onTable: 'people'),
         ];
 
         final output = Migration.generate(commands, 15);

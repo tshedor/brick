@@ -105,7 +105,7 @@ void main() {
 
         test('neq', () {
           final query = Query(
-            where: [Where('name', value: 'Jens', compare: Compare.notEqual)],
+            where: const [Where('name', value: 'Jens', compare: Compare.notEqual)],
           );
           final select = _buildTransformer<Demo>(query)
               .select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -115,7 +115,7 @@ void main() {
 
         test('lt/gt/lte/gte', () {
           final query = Query(
-            where: [
+            where: const [
               Where('age', value: '30', compare: Compare.lessThan),
               Where('age', value: '18', compare: Compare.greaterThan),
               Where('age', value: '25', compare: Compare.lessThanOrEqualTo),
@@ -133,7 +133,7 @@ void main() {
 
         test('contains', () {
           final query = Query(
-            where: [Where('name', value: 'search', compare: Compare.contains)],
+            where: const [Where('name', value: 'search', compare: Compare.contains)],
           );
           final select = _buildTransformer<Demo>(query)
               .select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -143,7 +143,7 @@ void main() {
 
         test('does not contain', () {
           final query = Query(
-            where: [
+            where: const [
               Where('name', value: 'search', compare: Compare.doesNotContain),
             ],
           );
@@ -157,7 +157,7 @@ void main() {
 
     group('#applyProviderArgs', () {
       test('orderBy', () {
-        final query = Query(providerArgs: {'orderBy': 'name asc'});
+        final query = Query(providerArgs: const {'orderBy': 'name asc'});
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
             queryTransformer.select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -170,7 +170,7 @@ void main() {
       });
 
       test('orderBy with descending order', () {
-        final query = Query(providerArgs: {'orderBy': 'name desc'});
+        final query = Query(providerArgs: const {'orderBy': 'name desc'});
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
             queryTransformer.select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -184,7 +184,7 @@ void main() {
 
       test('orderBy with referenced table', () {
         final query = Query(
-          providerArgs: {'orderBy': 'name desc', 'orderByReferencedTable': 'foreign_tables'},
+          providerArgs: const {'orderBy': 'name desc', 'orderByReferencedTable': 'foreign_tables'},
         );
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
@@ -198,7 +198,7 @@ void main() {
       });
 
       test('limit', () {
-        final query = Query(providerArgs: {'limit': 10});
+        final query = Query(providerArgs: const {'limit': 10});
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
             queryTransformer.select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -208,7 +208,8 @@ void main() {
       });
 
       test('limit with referenced table', () {
-        final query = Query(providerArgs: {'limit': 10, 'limitReferencedTable': 'foreign_tables'});
+        final query =
+            Query(providerArgs: const {'limit': 10, 'limitReferencedTable': 'foreign_tables'});
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
             queryTransformer.select(_supabaseClient.from(DemoAdapter().supabaseTableName));
@@ -218,7 +219,7 @@ void main() {
       });
 
       test('combined orderBy and limit', () {
-        final query = Query(providerArgs: {'orderBy': 'name desc', 'limit': 20});
+        final query = Query(providerArgs: const {'orderBy': 'name desc', 'limit': 20});
         final queryTransformer = _buildTransformer<Demo>(query);
         final filterBuilder =
             queryTransformer.select(_supabaseClient.from(DemoAdapter().supabaseTableName));

@@ -40,7 +40,10 @@ class SchemaColumn extends BaseSchemaObject {
         nullable = nullable ?? InsertColumn.defaults.nullable,
         unique = unique ?? InsertColumn.defaults.unique,
         assert(!isPrimaryKey || columnType == Column.integer, 'Primary key must be an integer'),
-        assert(!isForeignKey || (foreignTableName != null));
+        assert(
+          !isForeignKey || (foreignTableName != null),
+          'Foreign key must have a foreign table name',
+        );
 
   @override
   String get forGenerator {
@@ -63,10 +66,12 @@ class SchemaColumn extends BaseSchemaObject {
     }
 
     if (isForeignKey) {
-      parts.add('isForeignKey: $isForeignKey');
-      parts.add("foreignTableName: '$foreignTableName'");
-      parts.add('onDeleteCascade: $onDeleteCascade');
-      parts.add('onDeleteSetDefault: $onDeleteSetDefault');
+      parts.addAll({
+        'isForeignKey: $isForeignKey',
+        "foreignTableName: '$foreignTableName'",
+        'onDeleteCascade: $onDeleteCascade',
+        'onDeleteSetDefault: $onDeleteSetDefault',
+      });
     }
 
     if (unique != InsertColumn.defaults.unique) {

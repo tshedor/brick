@@ -239,6 +239,7 @@ void main() {
         subscription.pause();
         expect(TestRepository().subscriptions, hasLength(1));
         expect(TestRepository().subscriptions[Mounty]!.entries.first.value.isPaused, isTrue);
+        await subscription.cancel();
       });
 
       test('stores fetched data', () async {

@@ -1,3 +1,6 @@
+import 'package:brick_rest/brick_rest.dart';
+import 'package:brick_rest/src/rest_request_transformer.dart';
+
 /// A cohesive definition for [RestRequestTransformer]'s instance fields.
 class RestRequest {
   final Map<String, String>? headers;

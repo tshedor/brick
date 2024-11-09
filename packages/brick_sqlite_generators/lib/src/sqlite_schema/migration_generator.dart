@@ -27,7 +27,7 @@ class _MigrationImpl extends Migration {
 /// Recreate existing migrations as manageable objects.
 /// Eventually used in [SchemaDifference] to generate new [Migration]s
 class MigrationGenerator extends Generator {
-  static final emptySchema = Schema(0, tables: <SchemaTable>{});
+  static const emptySchema = Schema(0, tables: <SchemaTable>{});
 
   const MigrationGenerator();
 

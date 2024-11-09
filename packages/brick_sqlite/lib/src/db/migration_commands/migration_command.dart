@@ -1,4 +1,7 @@
+import 'package:meta/meta.dart';
+
 /// Extendible interface for SQLite migrations
+@immutable
 abstract class MigrationCommand {
   /// Outputs statement to be interpreted by SQLite
   String? get statement;

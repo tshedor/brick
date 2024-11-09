@@ -13,13 +13,13 @@ import 'package:source_gen/source_gen.dart';
 final _formatter = dart_style.DartFormatter();
 const migrationGenerator = MigrationGenerator();
 
-/// Produces a [Schema] from all @[OfflineFirst] annotations
+/// Produces a [Schema] from all `@OfflineFirst` annotations
 class SqliteSchemaGenerator {
   const SqliteSchemaGenerator();
 
   /// Complete schema file output
   ///
-  /// [classes] are all classes by their table name with the @[OfflineFirst] annotation
+  /// `classes` are all classes by their table name with the `@OfflineFirst` annotation
   String generate(LibraryReader library, List<SqliteFields> fieldses) {
     final newSchema = _createNewSchema(library, fieldses);
     final existingMigrations = migrationGenerator.expandAllMigrations(library);
@@ -142,17 +142,17 @@ class SqliteSchemaGenerator {
   }
 
   SchemaTable _createTable(String tableName, SqliteFields fields) {
-    final columns = _createColumns(fields).where((c) => c != null).toList();
-    columns.insert(
-      0,
-      SchemaColumn(
-        InsertTable.PRIMARY_KEY_COLUMN,
-        Column.integer,
-        autoincrement: true,
-        isPrimaryKey: true,
-        nullable: false,
-      ),
-    );
+    final columns = _createColumns(fields).where((c) => c != null).toList()
+      ..insert(
+        0,
+        SchemaColumn(
+          InsertTable.PRIMARY_KEY_COLUMN,
+          Column.integer,
+          autoincrement: true,
+          isPrimaryKey: true,
+          nullable: false,
+        ),
+      );
 
     final indices = _createIndices(tableName, fields);
 

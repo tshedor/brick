@@ -24,7 +24,7 @@ class GraphqlModelSerdesGenerator
   @override
   GraphqlSerializableExtended get config {
     if (reader.peek(configKey) == null) {
-      return GraphqlSerializableExtended();
+      return const GraphqlSerializableExtended();
     }
 
     final fieldRenameIndex =

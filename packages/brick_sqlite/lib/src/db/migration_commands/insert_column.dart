@@ -47,8 +47,8 @@ class InsertColumn extends MigrationCommand {
 
   String get definition => Migration.ofDefinition(definitionType);
   String get _addons {
-    final list = [_autoincrementStatement, _nullStatement, _defaultStatement];
-    list.removeWhere((s) => s == null);
+    final list = [_autoincrementStatement, _nullStatement, _defaultStatement]
+      ..removeWhere((s) => s == null);
     return list.join(' ');
   }
 

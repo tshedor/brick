@@ -22,9 +22,6 @@ class OfflineFirstWithSupabaseGenerator
     );
     final sqlite =
         OfflineFirstSqliteModelSerdesGenerator(element, annotation, repositoryName: repositoryName);
-    final generators = <SerdesGenerator>[];
-    generators.addAll(supabase.generators);
-    generators.addAll(sqlite.generators);
-    return generators;
+    return <SerdesGenerator>[...supabase.generators, ...sqlite.generators];
   }
 }

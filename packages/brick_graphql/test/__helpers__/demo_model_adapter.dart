@@ -48,20 +48,23 @@ Future<Map<String, dynamic>> _$DemoModelToGraphql(
 
 class DemoModelOperationTransformer extends GraphqlQueryOperationTransformer {
   @override
-  GraphqlOperation get delete => GraphqlOperation(
-        document: r'''mutation DeleteDemoModel($input: DemoModelInput!) {
+  GraphqlOperation get delete => const GraphqlOperation(
+        document: r'''
+mutation DeleteDemoModel($input: DemoModelInput!) {
       deleteDemoModel(input: $input) {}
     }''',
       );
 
   @override
   GraphqlOperation get get {
-    var document = '''query GetDemoModels() {
+    var document = '''
+query GetDemoModels() {
       getDemoModels() {}
     }''';
 
     if (query?.where != null) {
-      document = r'''query GetDemoModel($input: DemoModelFilterInput) {
+      document = r'''
+query GetDemoModel($input: DemoModelFilterInput) {
         getDemoModel(input: $input) {}
       }''';
     }
@@ -70,12 +73,14 @@ class DemoModelOperationTransformer extends GraphqlQueryOperationTransformer {
 
   @override
   GraphqlOperation get subscribe {
-    var document = '''subscription GetDemoModels() {
+    var document = '''
+subscription GetDemoModels() {
       getDemoModels() {}
     }''';
 
     if (query?.where != null) {
-      document = r'''subscription GetDemoModels($input: DemoModelInput) {
+      document = r'''
+subscription GetDemoModels($input: DemoModelInput) {
       getDemoModels(input: $input) {}
     }''';
     }
@@ -83,8 +88,9 @@ class DemoModelOperationTransformer extends GraphqlQueryOperationTransformer {
   }
 
   @override
-  GraphqlOperation get upsert => GraphqlOperation(
-        document: r'''mutation UpsertDemoModels($input: DemoModelInput) {
+  GraphqlOperation get upsert => const GraphqlOperation(
+        document: r'''
+mutation UpsertDemoModels($input: DemoModelInput) {
       upsertDemoModel(input: $input) {}
     }''',
       );
@@ -105,59 +111,44 @@ class DemoModelAdapter extends GraphqlAdapter<DemoModel> {
     required provider,
     repository,
   }) async =>
-      await _$DemoModelFromGraphql(input, provider: provider, repository: repository);
+      _$DemoModelFromGraphql(input, provider: provider, repository: repository);
   @override
   Future<Map<String, dynamic>> toGraphql(DemoModel input, {required provider, repository}) async =>
-      await _$DemoModelToGraphql(input, provider: provider, repository: repository);
+      _$DemoModelToGraphql(input, provider: provider, repository: repository);
 
   @override
   Map<String, RuntimeGraphqlDefinition> get fieldsToGraphqlRuntimeDefinition => {
         'primaryKey': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'primaryKey',
-          iterable: false,
           type: int,
         ),
         'id': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'id',
-          iterable: false,
           type: int,
         ),
         'assoc': const RuntimeGraphqlDefinition(
           association: true,
           documentNodeName: 'assoc',
-          iterable: false,
           type: DemoModelAssoc,
         ),
         'someField': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'someField',
-          iterable: false,
           type: bool,
         ),
         'complexFieldName': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'complexFieldName',
-          iterable: false,
           type: String,
         ),
         'lastName': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'lastName',
-          iterable: false,
           type: String,
         ),
         'name': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'fullName',
-          iterable: false,
           type: String,
         ),
         'simpleBool': const RuntimeGraphqlDefinition(
-          association: false,
           documentNodeName: 'simpleBool',
-          iterable: false,
           type: bool,
         ),
       };

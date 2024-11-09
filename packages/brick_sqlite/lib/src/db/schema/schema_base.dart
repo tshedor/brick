@@ -1,4 +1,4 @@
-import 'package:brick_sqlite/src/db/migration_commands/migration_command.dart';
+import 'package:brick_sqlite/db.dart';
 
 /// Generates code for [Migration] from [BaseSchemaObject]ss
 abstract class BaseSchemaObject {

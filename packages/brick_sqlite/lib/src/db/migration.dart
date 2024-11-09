@@ -1,6 +1,7 @@
 // Heavily, heavily inspired by [Aqueduct](https://github.com/stablekernel/aqueduct/blob/master/aqueduct/lib/src/db/schema/migration.dart)
 
 import 'package:brick_sqlite/src/db/migration_commands/migration_command.dart';
+import 'package:meta/meta.dart';
 
 /// SQLite data types.
 ///
@@ -24,6 +25,7 @@ enum Column {
   varchar
 }
 
+@immutable
 abstract class Migration {
   /// Order to run; should be unique and sequential with other [Migration]s
   final int version;
@@ -67,7 +69,7 @@ abstract class Migration {
         return 'TEXT';
       case Column.varchar:
         return 'VARCHAR';
-      default:
+      case Column.undefined:
         return throw ArgumentError('$definition not found in Column');
     }
   }
@@ -116,7 +118,7 @@ abstract class Migration {
         return String;
       case Column.varchar:
         return String;
-      default:
+      case Column.undefined:
         return throw ArgumentError('$definition not found in Column');
     }
   }

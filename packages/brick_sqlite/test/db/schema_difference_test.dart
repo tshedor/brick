@@ -48,7 +48,7 @@ void main() {
 
     test('#droppedTables', () {
       final oldSchema = Schema(0, tables: {table});
-      final newSchema = Schema(1, tables: {});
+      const newSchema = Schema(1, tables: {});
 
       final diff = SchemaDifference(oldSchema, newSchema);
       expect(diff.droppedTables, contains(table));
@@ -57,7 +57,7 @@ void main() {
     });
 
     test('#insertedTables', () {
-      final oldSchema = Schema(0, tables: {});
+      const oldSchema = Schema(0, tables: {});
       final newSchema = Schema(1, tables: {table});
 
       final diff = SchemaDifference(oldSchema, newSchema);
@@ -231,14 +231,14 @@ void main() {
 
     group('#toMigrationCommands', () {
       test('#insertedTables', () {
-        final oldSchema = Schema(0, tables: {});
+        const oldSchema = Schema(0, tables: {});
         final newSchema = Schema(1, tables: {table});
 
         final diff = SchemaDifference(oldSchema, newSchema);
         expect(
           diff.toMigrationCommands(),
           [
-            InsertTable('demo'),
+            const InsertTable('demo'),
             InsertColumn(column.name, Column.varchar, onTable: column.tableName!),
           ],
         );
@@ -247,14 +247,14 @@ void main() {
 
       test('#insertedColumns', () {
         table.columns.add(column);
-        final oldSchema = Schema(0, tables: {});
+        const oldSchema = Schema(0, tables: {});
         final newSchema = Schema(1, tables: {table});
 
         final diff = SchemaDifference(oldSchema, newSchema);
         expect(
           diff.toMigrationCommands(),
           [
-            InsertTable('demo'),
+            const InsertTable('demo'),
             InsertColumn(column.name, Column.varchar, onTable: column.tableName!),
           ],
         );
@@ -273,16 +273,16 @@ void main() {
 
       test('#droppedTables', () {
         final oldSchema = Schema(0, tables: {table});
-        final newSchema = Schema(1, tables: {});
+        const newSchema = Schema(1, tables: {});
 
         final diff = SchemaDifference(oldSchema, newSchema);
-        expect(diff.toMigrationCommands(), [DropTable('demo')]);
+        expect(diff.toMigrationCommands(), [const DropTable('demo')]);
         expect(diff.droppedTables, hasLength(1));
         expect(diff.insertedTables, isEmpty);
       });
 
       test('joins table indexes', () {
-        final oldSchema = Schema(0, tables: {});
+        const oldSchema = Schema(0, tables: {});
         final newSchema = Schema(
           1,
           tables: {
@@ -320,22 +320,22 @@ void main() {
 
         final diff = SchemaDifference(oldSchema, newSchema);
         expect(diff.toMigrationCommands(), [
-          InsertTable('_brick_People_friend'),
-          InsertForeignKey(
+          const InsertTable('_brick_People_friend'),
+          const InsertForeignKey(
             '_brick_People_friend',
             'People',
             foreignKeyColumn: 'l_People_brick_id',
             onDeleteCascade: false,
             onDeleteSetDefault: true,
           ),
-          InsertForeignKey(
+          const InsertForeignKey(
             '_brick_People_friend',
             'Friend',
             foreignKeyColumn: 'f_Friend_brick_id',
             onDeleteCascade: false,
             onDeleteSetDefault: true,
           ),
-          CreateIndex(
+          const CreateIndex(
             columns: ['l_People_brick_id', 'f_Friend_brick_id'],
             onTable: '_brick_People_friend',
             unique: true,
@@ -345,7 +345,7 @@ void main() {
     });
 
     test('#forGenerator', () {
-      final oldSchema = Schema(0, tables: {});
+      const oldSchema = Schema(0, tables: {});
       final newSchema = Schema(1, tables: {table});
 
       final diff = SchemaDifference(oldSchema, newSchema);
@@ -365,10 +365,10 @@ void main() {
     });
 
     test('oldSchema is less than newSchema', () {
-      final old = Schema(2, tables: <SchemaTable>{});
-      final fresh = Schema(1, tables: <SchemaTable>{});
+      const old = Schema(2, tables: <SchemaTable>{});
+      const fresh = Schema(1, tables: <SchemaTable>{});
 
-      expect(() => SchemaDifference(old, fresh), throwsA(TypeMatcher<AssertionError>()));
+      expect(() => SchemaDifference(old, fresh), throwsA(const TypeMatcher<AssertionError>()));
     });
   });
 }

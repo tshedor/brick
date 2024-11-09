@@ -12,10 +12,10 @@ import 'package:brick_offline_first/src/offline_first_repository.dart';
 /// should not be paginated and complete from a single request.
 mixin DestructiveLocalSyncFromRemoteMixin<T extends OfflineFirstModel>
     on OfflineFirstRepository<T> {
+  /// When [forceLocalSyncFromRemote] is `true`, local instances that do not exist in the [remoteProvider]
+  /// are destroyed. Further, when `true`, all values from other parameters except [query] are ignored.
   @override
   Future<List<TModel>> get<TModel extends T>({
-    /// When [forceLocalSyncFromRemote] is `true`, local instances that do not exist in the [remoteProvider]
-    /// are destroyed. Further, when `true`, all values from other parameters except [query] are ignored.
     bool forceLocalSyncFromRemote = false,
     OfflineFirstGetPolicy policy = OfflineFirstGetPolicy.awaitRemoteWhenNoneExist,
     Query? query,

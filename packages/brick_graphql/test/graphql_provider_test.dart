@@ -6,7 +6,7 @@ import '__helpers__/stub_response.dart';
 import '__mocks__.dart';
 
 GraphqlProvider generateProvider(
-  dynamic response, {
+  response, {
   List<String>? errors,
   String? variablesNamespace,
 }) {

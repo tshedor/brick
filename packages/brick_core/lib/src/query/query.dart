@@ -1,16 +1,18 @@
 import 'dart:convert';
 
-import 'package:brick_core/src/query/where.dart';
-import 'package:collection/collection.dart' show MapEquality, ListEquality;
+import 'package:brick_core/core.dart';
+import 'package:collection/collection.dart' show ListEquality, MapEquality;
+import 'package:meta/meta.dart';
 
 const _mapEquality = MapEquality();
 const _listEquality = ListEquality();
 
-/// An interface to request data from a [Provider] or [Repository].
+/// An interface to request data from a [Provider] or `Repository`.
+@immutable
 class Query {
   /// How this query interacts with its invoking provider.
   ///
-  /// Often the invoking [Repository] will appropriately adjust the [action] when
+  /// Often the invoking `Repository` will appropriately adjust the [action] when
   /// interacting with the provider. For example:
   /// ```dart
   ///   upsert(query) => final q = query.copyWith(action: QueryAction.upsert)
@@ -51,13 +53,13 @@ class Query {
   }) : providerArgs = providerArgs ?? {} {
     /// Number of results first returned from query; `0` returns all. Must be greater than -1
     if (this.providerArgs['limit'] != null) {
-      assert(this.providerArgs['limit'] > -1);
+      assert(this.providerArgs['limit'] > -1, 'limit must be greater than -1');
     }
 
     /// Offset results returned from query. Must be greater than -1 and must be used with limit
     if (this.providerArgs['offset'] != null) {
-      assert(this.providerArgs['offset'] > -1);
-      assert(this.providerArgs['limit'] != null);
+      assert(this.providerArgs['offset'] > -1, 'offset must be greater than -1');
+      assert(this.providerArgs['limit'] != null, 'limit must be greater than -1');
     }
   }
 
@@ -75,7 +77,7 @@ class Query {
   /// [limit1] adds a limit param when `true`. Defaults to `false`.
   factory Query.where(
     String evaluatedField,
-    dynamic value, {
+    value, {
     Compare? compare,
     bool limit1 = false,
   }) {

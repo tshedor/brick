@@ -32,15 +32,11 @@ class DemoModelAssocAdapter extends GraphqlAdapter<DemoModelAssoc> {
   @override
   final Map<String, RuntimeGraphqlDefinition> fieldsToGraphqlRuntimeDefinition = {
     'primaryKey': const RuntimeGraphqlDefinition(
-      association: false,
       documentNodeName: 'primaryKey',
-      iterable: false,
       type: int,
     ),
     'name': const RuntimeGraphqlDefinition(
-      association: false,
       documentNodeName: 'fullName',
-      iterable: false,
       type: String,
     ),
   };
@@ -51,20 +47,21 @@ class DemoModelAssocAdapter extends GraphqlAdapter<DemoModelAssoc> {
     required provider,
     repository,
   }) async =>
-      await _$DemoModelAssocFromGraphql(input, provider: provider, repository: repository);
+      _$DemoModelAssocFromGraphql(input, provider: provider, repository: repository);
   @override
   Future<Map<String, dynamic>> toGraphql(
     DemoModelAssoc input, {
     required provider,
     repository,
   }) async =>
-      await _$DemoModelAssocToGraphql(input, provider: provider, repository: repository);
+      _$DemoModelAssocToGraphql(input, provider: provider, repository: repository);
 }
 
 class _DemoModelAssocTransformer extends GraphqlQueryOperationTransformer {
   @override
-  GraphqlOperation get get => GraphqlOperation(
-        document: '''query GetDemoAssocModels() {
+  GraphqlOperation get get => const GraphqlOperation(
+        document: '''
+query GetDemoAssocModels() {
           getDemoAssocModels() {}
         }''',
       );
@@ -80,15 +77,11 @@ class DemoModelAssocWithSubfieldsAdapter extends GraphqlAdapter<DemoModelAssoc> 
   @override
   final Map<String, RuntimeGraphqlDefinition> fieldsToGraphqlRuntimeDefinition = {
     'primaryKey': const RuntimeGraphqlDefinition(
-      association: false,
       documentNodeName: '_brick_id',
-      iterable: false,
       type: int,
     ),
     'name': const RuntimeGraphqlDefinition(
-      association: false,
       documentNodeName: 'full_name',
-      iterable: false,
       subfields: {
         'first': {'subfield1': {}},
         'last': {},
@@ -103,12 +96,12 @@ class DemoModelAssocWithSubfieldsAdapter extends GraphqlAdapter<DemoModelAssoc> 
     required provider,
     repository,
   }) async =>
-      await _$DemoModelAssocFromGraphql(input, provider: provider, repository: repository);
+      _$DemoModelAssocFromGraphql(input, provider: provider, repository: repository);
   @override
   Future<Map<String, dynamic>> toGraphql(
     DemoModelAssoc input, {
     required provider,
     repository,
   }) async =>
-      await _$DemoModelAssocToGraphql(input, provider: provider, repository: repository);
+      _$DemoModelAssocToGraphql(input, provider: provider, repository: repository);
 }

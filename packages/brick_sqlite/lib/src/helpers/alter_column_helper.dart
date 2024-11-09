@@ -19,7 +19,7 @@ class AlterColumnHelper {
   bool get requiresSchema => isDrop || isRename || isUniqueInsert;
 
   String get tableName {
-    assert(requiresSchema);
+    assert(requiresSchema, 'Command does not require schema');
 
     if (isDrop) {
       return (command as DropColumn).onTable;
@@ -74,7 +74,7 @@ class AlterColumnHelper {
 
   /// Given new columns, create the SQLite statement
   String _newColumnsExpression(List<Map<String, dynamic>> columns) {
-    return columns.map((Map<String, dynamic> column) {
+    return columns.map((column) {
       final definition = [column['name'] as String, column['type'] as String];
 
       if (column['notnull'] == 1) {

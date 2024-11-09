@@ -1,6 +1,7 @@
 import 'package:brick_build/src/builders/aggregate_builder.dart';
 import 'package:brick_build/src/builders/base.dart';
 import 'package:brick_build/src/model_dictionary_generator.dart';
+import 'package:brick_core/core.dart';
 import 'package:build/build.dart';
 import 'package:glob/glob.dart';
 import 'package:source_gen/source_gen.dart';
@@ -35,14 +36,13 @@ class ModelDictionaryBuilder<_ClassAnnotation> extends BaseBuilder<_ClassAnnotat
     }
 
     final contents = await buildStep.readAsString(buildStep.inputId);
-    final stopwatch = Stopwatch();
-    stopwatch.start();
+    final stopwatch = Stopwatch()..start();
 
-    final allImports = AggregateBuilder.findAllImports(contents);
+    final allImports = AggregateBuilder.findAllImports(contents)
+      ..removeAll(["import 'dart:convert';", 'import "dart:convert";'])
+      ..removeAll(expectedImportRemovals);
     final classNamesByFileNames = classFilePathsFromAnnotations(annotatedElements, filesToContents);
     final modelDictionaryOutput = modelDictionaryGenerator.generate(classNamesByFileNames);
-    allImports.removeAll(["import 'dart:convert';", 'import "dart:convert";']);
-    allImports.removeAll(expectedImportRemovals);
     final analyzedImports = allImports
         .map((i) => '// ignore: unused_import, unused_shown_name, unnecessary_import\n$i')
         .join('\n');

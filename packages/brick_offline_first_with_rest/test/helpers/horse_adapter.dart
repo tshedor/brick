@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 part of '__mocks__.dart';
 
 Future<Horse> _$HorseFromRest(

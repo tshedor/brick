@@ -23,7 +23,7 @@ class RestModelSerdesGenerator extends ProviderSerializableGenerator<RestSeriali
   @override
   RestSerializableExtended get config {
     if (reader.peek(configKey) == null) {
-      return RestSerializableExtended();
+      return const RestSerializableExtended();
     }
 
     final fieldRenameIndex =

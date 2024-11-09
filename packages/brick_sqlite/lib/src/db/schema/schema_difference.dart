@@ -1,10 +1,4 @@
-import 'package:brick_sqlite/src/db/migration_commands/drop_column.dart';
-import 'package:brick_sqlite/src/db/migration_commands/drop_table.dart';
-import 'package:brick_sqlite/src/db/migration_commands/migration_command.dart';
-import 'package:brick_sqlite/src/db/schema/schema.dart';
-import 'package:brick_sqlite/src/db/schema/schema_column.dart';
-import 'package:brick_sqlite/src/db/schema/schema_index.dart';
-import 'package:brick_sqlite/src/db/schema/schema_table.dart';
+import 'package:brick_sqlite/db.dart';
 import 'package:collection/collection.dart';
 
 /// Compares two schemas to produce migrations that conver the difference
@@ -12,7 +6,8 @@ class SchemaDifference {
   final Schema oldSchema;
   final Schema newSchema;
 
-  SchemaDifference(this.oldSchema, this.newSchema) : assert(oldSchema.version < newSchema.version);
+  SchemaDifference(this.oldSchema, this.newSchema)
+      : assert(oldSchema.version < newSchema.version, 'Old schema must be less than new schema');
 
   Set<SchemaTable> get droppedTables => oldSchema.tables.difference(newSchema.tables);
 
@@ -40,7 +35,7 @@ class SchemaDifference {
       return item.toCommand(shouldDrop: true);
     }).cast<DropTable>();
 
-    // TODO detect if dropped column is a foreign key joins association AND WRITE TEST
+    // TODOdetect if dropped column is a foreign key joins association AND WRITE TEST
 
     // Only drop column if the table isn't being dropped too
     final removedColumns = droppedColumns
@@ -76,14 +71,14 @@ class SchemaDifference {
 
   Set<SchemaColumn> _compareColumns(Schema from, Schema to) {
     Set<SchemaColumn> differenceFromTable(SchemaTable fromTable) {
-      final toColumns =
-          to.tables.firstWhereOrNull((t) => t.name == fromTable.name)?.columns ?? <SchemaColumn>{};
+      final toColumns = (to.tables.firstWhereOrNull((t) => t.name == fromTable.name)?.columns ??
+          <SchemaColumn>{})
+        ..removeWhere((c) => c.isPrimaryKey);
 
-      final fromColumns = <SchemaColumn>{}..addAll(fromTable.columns);
-
-      // Primary keys are added on [InsertTable]
-      fromColumns.removeWhere((c) => c.isPrimaryKey);
-      toColumns.removeWhere((c) => c.isPrimaryKey);
+      final fromColumns = <SchemaColumn>{}
+        ..addAll(fromTable.columns)
+        // Primary keys are added on [InsertTable]
+        ..removeWhere((c) => c.isPrimaryKey);
 
       // From and to tables should have identical names via `lookup`
       for (final c in fromColumns) {

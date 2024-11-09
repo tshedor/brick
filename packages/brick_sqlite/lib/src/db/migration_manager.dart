@@ -1,4 +1,4 @@
-import 'package:brick_sqlite/src/db/migration.dart';
+import 'package:brick_sqlite/db.dart';
 import 'package:meta/meta.dart';
 
 /// Holds all migrations and outputs statements for SQLite to consume
@@ -16,7 +16,7 @@ class MigrationManager {
 
   /// Key/value migrations based on their version
   Map<int, Migration> get migrationByVersion {
-    return {for (var m in migrations) m.version: m};
+    return {for (final m in migrations) m.version: m};
   }
 
   /// Migrations after a version
@@ -24,8 +24,8 @@ class MigrationManager {
   /// [versionNumber] defaults to [version]
   List<Migration> migrationsSince([int? versionNumber]) {
     final number = versionNumber ?? version;
-    final validMigrations = migrations.where((m) => m.version > number).toList();
-    validMigrations.sort((a, b) => a.version.compareTo(b.version));
+    final validMigrations = migrations.where((m) => m.version > number).toList()
+      ..sort((a, b) => a.version.compareTo(b.version));
     return validMigrations;
   }
 
@@ -51,8 +51,7 @@ class MigrationManager {
       return 0;
     }
 
-    final versions = allMigrations.map((m) => m.version).toList();
-    versions.sort();
+    final versions = allMigrations.map((m) => m.version).toList()..sort();
     return versions.last;
   }
 }

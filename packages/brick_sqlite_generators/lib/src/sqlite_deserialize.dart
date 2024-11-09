@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:brick_build/generators.dart' show SerdesGenerator, SharedChecker;
 import 'package:brick_sqlite/brick_sqlite.dart';
-import 'package:brick_sqlite/db.dart' show InsertTable, InsertForeignKey;
+import 'package:brick_sqlite/db.dart' show InsertForeignKey, InsertTable;
 import 'package:brick_sqlite_generators/src/sqlite_serdes_generator.dart';
 import 'package:source_gen/source_gen.dart' show InvalidGenerationSourceError;
 
@@ -81,7 +81,7 @@ class SqliteDeserialize<_Model extends SqliteModel> extends SqliteSerdesGenerato
 
       if (checker.isArgTypeASibling) {
         final awaited = wrappedInFuture ? 'async => await' : '=>';
-        final query = '''
+        const query = '''
           Query.where('${InsertTable.PRIMARY_KEY_FIELD}', ${InsertTable.PRIMARY_KEY_FIELD}, limit1: true),
         ''';
         final argTypeAsString = SharedChecker.withoutNullability(argType);
@@ -147,7 +147,7 @@ class SqliteDeserialize<_Model extends SqliteModel> extends SqliteSerdesGenerato
 
       // Iterable<fromJson>
       if (argTypeChecker.fromJsonConstructor != null) {
-        final klass = argTypeChecker.targetType.element as ClassElement;
+        final klass = argTypeChecker.targetType.element! as ClassElement;
         final parameterType = argTypeChecker.fromJsonConstructor!.parameters.first.type;
         final nullableSuffix = checker.isNullable ? " ?? '[]'" : '';
 
@@ -208,7 +208,7 @@ class SqliteDeserialize<_Model extends SqliteModel> extends SqliteSerdesGenerato
     } else if (checker.isMap) {
       return 'jsonDecode($fieldValue)';
     } else if (checker.fromJsonConstructor != null) {
-      final klass = checker.targetType.element as ClassElement;
+      final klass = checker.targetType.element! as ClassElement;
       final parameterType = checker.fromJsonConstructor!.parameters.first.type;
       return '${klass.displayName}.fromJson(jsonDecode($fieldValue as String) as ${parameterType.getDisplayString(withNullability: true)})';
     }

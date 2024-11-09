@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:sqflite_common/sqlite_api.dart' show Database, DatabaseExecutor;
@@ -101,7 +102,7 @@ abstract class RequestSqliteCache<TRequest> {
   TRequest sqliteToRequest(Map<String, dynamic> data);
 
   /// Builds request into a new SQLite-insertable row
-  /// Only available if [request] was initialized from [fromRequest]
+  /// Only available if [request] was initialized from `fromRequest`
   ///
   /// This is a function to ensure `DateTime.now()` is invoked predictably.
   Map<String, dynamic> toSqlite();

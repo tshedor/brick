@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:brick_core/core.dart' show Query, ModelRepository, QueryAction, Provider;
-import 'package:brick_offline_first/src/models/offline_first_model.dart';
-import 'package:brick_offline_first/src/offline_first_policy.dart';
+import 'package:brick_core/core.dart' show ModelRepository, Provider, Query, QueryAction;
+import 'package:brick_offline_first/brick_offline_first.dart';
 import 'package:brick_sqlite/brick_sqlite.dart';
 import 'package:brick_sqlite/db.dart';
 import 'package:brick_sqlite/memory_cache_provider.dart';
@@ -15,7 +14,7 @@ import 'package:meta/meta.dart';
 /// A [ModelRepository] that interacts with a [SqliteProvider] first before using a [Provider] from a remote source.
 ///
 /// The `OfflineFirstRepository` should be extended by an implementation in the end class.
-/// The implementation can then be accessed via singleton or [InheritedWidget].
+/// The implementation can then be accessed via singleton or `InheritedWidget`.
 /// For example:
 /// ```dart
 /// class MyRepository extends OfflineFirstRepository {
@@ -44,7 +43,7 @@ import 'package:meta/meta.dart';
 abstract class OfflineFirstRepository<TRepositoryModel extends OfflineFirstModel>
     implements ModelRepository<TRepositoryModel> {
   /// Refetch results in the background from remote source when any request is made.
-  /// Defaults to [false].
+  /// Defaults to `false`.
   final bool autoHydrate;
 
   /// Required to maintain the same policy for [getAssociation] requests.
@@ -492,8 +491,7 @@ abstract class OfflineFirstRepository<TRepositoryModel extends OfflineFirstModel
     final results = await Future.wait<int?>(modelIds, eagerError: true);
 
     MapEntry modelWithPrimaryKey(index, id) {
-      final model = models[index];
-      model.primaryKey = id;
+      final model = models[index]..primaryKey = id;
       return MapEntry(index, model);
     }
 

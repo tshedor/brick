@@ -253,11 +253,11 @@ abstract class SerdesGenerator<FieldAnnotation extends FieldSerializable,
   String? digestPlaceholders(String? input, String annotatedName, String fieldName) {
     if (input == null) return null;
 
-    input = input
+    final withReplacements = input
         .replaceAll(FieldSerializable.ANNOTATED_NAME_VARIABLE, annotatedName)
         .replaceAll(FieldSerializable.DATA_PROPERTY_VARIABLE, "data['$annotatedName']")
         .replaceAll(FieldSerializable.INSTANCE_PROPERTY_VARIABLE, 'instance.$fieldName');
-    return SerdesGenerator.digestCustomGeneratorPlaceholders(input);
+    return SerdesGenerator.digestCustomGeneratorPlaceholders(withReplacements);
   }
 
   /// Injected between the field member in the constructor and the contents
@@ -307,14 +307,14 @@ abstract class SerdesGenerator<FieldAnnotation extends FieldSerializable,
   /// If this class possesses a factory such as `fromRest`
   @protected
   bool hasConstructor(DartType type) {
-    final classElement = type.element as ClassElement;
+    final classElement = type.element! as ClassElement;
     return classElement.getNamedConstructor(constructorName) != null;
   }
 
   /// If this class possesses a serializing method such as `toSqlite`
   @protected
   bool hasSerializer(DartType type) {
-    final classElement = type.element as ClassElement;
+    final classElement = type.element! as ClassElement;
     return classElement.getMethod(serializeMethod) != null;
   }
 
@@ -363,7 +363,7 @@ abstract class SerdesGenerator<FieldAnnotation extends FieldSerializable,
     return 'instance.${field.name}';
   }
 
-  /// If the annotation includes a [defaultValue], use it when the received value is null
+  /// If the annotation includes a `defaultValue`, use it when the received value is null
   static String defaultValueSuffix(FieldSerializable fieldAnnotation) {
     return fieldAnnotation.defaultValue != null ? ' ?? ${fieldAnnotation.defaultValue}' : '';
   }
@@ -417,7 +417,7 @@ abstract class SerdesGenerator<FieldAnnotation extends FieldSerializable,
 
 // from dart:collections, instead of importing a whole package
 T? _firstWhereOrNull<T>(Iterable<T> items, bool Function(T item) test) {
-  for (var item in items) {
+  for (final item in items) {
     if (test(item)) return item;
   }
   return null;

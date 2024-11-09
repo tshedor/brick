@@ -1,7 +1,5 @@
 import 'package:brick_core/core.dart';
-import 'package:brick_supabase/src/runtime_supabase_column_definition.dart';
-import 'package:brick_supabase/src/supabase_model.dart';
-import 'package:brick_supabase/src/supabase_provider.dart';
+import 'package:brick_supabase/brick_supabase.dart';
 
 /// Constructors that convert app models to and from Supabase
 abstract mixin class SupabaseAdapter<TModel extends SupabaseModel> implements Adapter<TModel> {

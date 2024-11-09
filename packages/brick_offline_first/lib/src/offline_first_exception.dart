@@ -1,5 +1,7 @@
+import 'package:brick_sqlite/brick_sqlite.dart';
+
 class OfflineFirstException implements Exception {
-  /// The producing error from either [RestProvider] or [SqliteProvider].
+  /// The producing error from either `RestProvider` or [SqliteProvider].
   final Exception originalError;
 
   OfflineFirstException(this.originalError);

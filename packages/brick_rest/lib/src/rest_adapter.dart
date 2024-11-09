@@ -4,7 +4,7 @@ import 'package:brick_rest/src/rest_provider.dart';
 import 'package:brick_rest/src/rest_request_transformer.dart';
 
 class _DefaultRestTransformer extends RestRequestTransformer {
-  const _DefaultRestTransformer(Query? query, RestModel? instance) : super(null, null);
+  const _DefaultRestTransformer() : super(null, null);
 }
 
 /// Constructors that convert app models to and from REST

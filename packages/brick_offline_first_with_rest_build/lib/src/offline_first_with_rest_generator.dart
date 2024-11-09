@@ -18,9 +18,6 @@ class OfflineFirstWithRestGenerator extends OfflineFirstGenerator<ConnectOffline
         OfflineFirstRestModelSerdesGenerator(element, annotation, repositoryName: repositoryName);
     final sqlite =
         OfflineFirstSqliteModelSerdesGenerator(element, annotation, repositoryName: repositoryName);
-    final generators = <SerdesGenerator>[];
-    generators.addAll(rest.generators);
-    generators.addAll(sqlite.generators);
-    return generators;
+    return <SerdesGenerator>[...rest.generators, ...sqlite.generators];
   }
 }

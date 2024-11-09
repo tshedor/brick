@@ -50,7 +50,7 @@ class DemoRestRequestTransformer extends RestRequestTransformer {
   const DemoRestRequestTransformer(super.query, RestModel? super.instance);
 }
 
-/// Construct a [DemoRestModel] for the [RestRepository]
+/// Construct a [DemoRestModel] for the `RestRepository`
 class DemoRestModelAdapter extends RestAdapter<DemoRestModel> {
   @override
   Future<DemoRestModel> fromRest(data, {required provider, repository}) =>

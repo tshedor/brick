@@ -30,7 +30,7 @@ class SharedChecker<_SiblingModel extends Model> {
   }
 
   Type get asPrimitive {
-    assert(isDartCoreType);
+    assert(isDartCoreType, 'Not a Dart core type');
     if (isBool) return bool;
     if (isDateTime) return DateTime;
     if (isDouble) return double;
@@ -72,7 +72,7 @@ class SharedChecker<_SiblingModel extends Model> {
   /// If the constructor can't be found, `null` is returned.
   ConstructorElement? get fromJsonConstructor {
     if (targetType.element is ClassElement) {
-      for (final constructor in (targetType.element as ClassElement).constructors) {
+      for (final constructor in (targetType.element! as ClassElement).constructors) {
         if (constructor.name == 'fromJson') return constructor;
       }
     }
@@ -84,7 +84,8 @@ class SharedChecker<_SiblingModel extends Model> {
     return argType.isDartAsyncFuture || argType.isDartAsyncFutureOr;
   }
 
-  /// If the sub type has super type [SqliteModel]
+  /// If the sub type has super type of [_SiblingModel]. For example,
+  /// given the [_SiblingModel] is `SqliteModel`,
   /// Returns true for `Future<SqliteModel>`,
   /// `List<Future<SqliteModel>>`, and `List<SqliteModel>`.
   bool get isArgTypeASibling {
@@ -177,7 +178,7 @@ class SharedChecker<_SiblingModel extends Model> {
   /// For example, a field `final Currency amount` with a type definition
   /// `class Currency extends OfflineFirstSerdes<T, X, Y> {}` would return `[T, X, Y]`.
   List<DartType> get superClassTypeArgs {
-    final classElement = targetType.element as ClassElement;
+    final classElement = targetType.element! as ClassElement;
     if (classElement.supertype?.typeArguments == null ||
         classElement.supertype!.typeArguments.isEmpty) {
       throw InvalidGenerationSourceError(
@@ -195,7 +196,7 @@ class SharedChecker<_SiblingModel extends Model> {
   /// If the method can't be found, `null` is returned.
   MethodElement? get toJsonMethod {
     if (targetType.element is ClassElement) {
-      for (final method in (targetType.element as ClassElement).methods) {
+      for (final method in (targetType.element! as ClassElement).methods) {
         if (method.name == 'toJson') return method;
       }
     }

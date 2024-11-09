@@ -35,7 +35,7 @@ Future<Map<String, dynamic>> _$MountyToSqlite(
 
 class MountyOperationTransformer extends GraphqlQueryOperationTransformer {
   @override
-  GraphqlOperation get delete => GraphqlOperation(
+  GraphqlOperation get delete => const GraphqlOperation(
         document: r'''mutation DeleteDemoModel($input: DemoModelInput!) {
       deleteDemoModel(input: $input) {}
     }''',
@@ -70,7 +70,7 @@ class MountyOperationTransformer extends GraphqlQueryOperationTransformer {
   }
 
   @override
-  GraphqlOperation get upsert => GraphqlOperation(
+  GraphqlOperation get upsert => const GraphqlOperation(
         document: r'''mutation UpsertDemoModels($input: DemoModelInput) {
       upsertDemoModel(input: $input) {}
     }''',

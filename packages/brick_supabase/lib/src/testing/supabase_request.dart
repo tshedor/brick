@@ -1,7 +1,8 @@
 import 'package:brick_core/query.dart';
+import 'package:brick_supabase/brick_supabase.dart';
 import 'package:brick_supabase/src/query_supabase_transformer.dart';
-import 'package:brick_supabase/src/supabase_model.dart';
-import 'package:brick_supabase/src/supabase_model_dictionary.dart';
+import 'package:brick_supabase/src/testing/supabase_mock_server.dart';
+import 'package:brick_supabase/testing.dart';
 
 class SupabaseRequest<TModel extends SupabaseModel> {
   /// If `fields` are not provided, they will try to be inferred using the

@@ -72,7 +72,7 @@ abstract class TestAdapter<TModel extends TestModel> implements Adapter<TModel> 
 
 /// Associates app models with their [TestAdapter]
 class TestModelDictionary extends ModelDictionary<TestModel, TestAdapter<TestModel>> {
-  const TestModelDictionary(Map<Type, TestAdapter<TestModel>> mappings) : super(mappings);
+  const TestModelDictionary(super.mappings);
 }
 
 /// Models accessible to the [TestProvider]

@@ -15,6 +15,7 @@ Link stubGraphqlLink(
   final link = MockLink();
 
   if (wrapInTopLevelKeyAndArray) {
+    // ignore: parameter_assignments
     response = {
       'result': [response],
     };

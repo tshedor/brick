@@ -10,7 +10,7 @@ import '__helpers__/stub_response.dart';
 import '__mocks__.dart';
 
 GraphqlProvider generateProvider(
-  dynamic response, {
+  response, {
   List<String>? errors,
 }) {
   return GraphqlProvider(
@@ -40,7 +40,8 @@ void main() {
         ).request;
         expect(
           printNode(request!.operation.document),
-          startsWith('''query GetDemoModels {
+          startsWith('''
+query GetDemoModels {
   getDemoModels {'''),
         );
       });
@@ -50,7 +51,7 @@ void main() {
           action: QueryAction.upsert,
           modelDictionary: provider.modelDictionary,
           query: Query(
-            providerArgs: {
+            providerArgs: const {
               'context': {'SampleContextEntry': SampleContextEntry('myValue')},
             },
           ),
@@ -69,7 +70,8 @@ void main() {
         );
         expect(
           printNode(request.request!.operation.document),
-          startsWith(r'''mutation UpsertDemoModels($input: DemoModelInput!) {
+          startsWith(r'''
+mutation UpsertDemoModels($input: DemoModelInput!) {
   upsertDemoModel(input: $input) {'''),
         );
         expect(request.requestVariables, variables);
@@ -144,8 +146,8 @@ void main() {
       test('skips associations', () {
         final query = Query(
           where: [
-            Where('lastName').isExactly(1),
-            Where('assoc').isExactly(Where('name').isExactly(1)),
+            const Where('lastName').isExactly(1),
+            const Where('assoc').isExactly(const Where('name').isExactly(1)),
           ],
         );
         expect(request.queryToVariables(query), {'lastName': 1});

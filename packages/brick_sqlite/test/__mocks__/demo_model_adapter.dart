@@ -129,7 +129,7 @@ class DemoModelAdapter extends SqliteAdapter<DemoModel> {
       iterable: false,
       type: bool,
     ),
-    'simpleTime': RuntimeSqliteColumnDefinition(
+    'simpleTime': const RuntimeSqliteColumnDefinition(
       association: false,
       columnName: 'simple_time',
       iterable: false,

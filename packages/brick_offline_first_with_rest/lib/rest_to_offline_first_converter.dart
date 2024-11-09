@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:brick_offline_first/brick_offline_first.dart';
 import 'package:dart_style/dart_style.dart' as dart_style;
 import 'package:http/http.dart';
 
@@ -67,8 +68,7 @@ class RestToOfflineFirstConverter {
 
   /// Produce instance fields
   String generateFields(Map<String, dynamic> fields) {
-    final keys = fields.keys.toList();
-    keys.sort();
+    final keys = fields.keys.toList()..sort();
     return keys.fold<List<String>>(<String>[], (acc, key) {
       final valueType = fields[key].runtimeType.toString();
       return acc..add('  final $valueType ${toCamelCase(key)};');
@@ -77,8 +77,7 @@ class RestToOfflineFirstConverter {
 
   /// Produce fields to be invoked in the default constructor
   String generateConstructorFields(Map<String, dynamic> fields) {
-    final keys = fields.keys.toList();
-    keys.sort();
+    final keys = fields.keys.toList()..sort();
     return keys.fold<List<String>>(<String>[], (acc, key) {
       return acc..add('    this.${toCamelCase(key)}');
     }).join(',\n');

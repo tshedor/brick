@@ -33,9 +33,7 @@ void main() {
 
     test('#defaultHeaders', () async {
       final headers = {'Authorization': 'token=12345'};
-      final provider = generateProvider('[{"name": "Guy"}]');
-
-      provider.defaultHeaders = headers;
+      final provider = generateProvider('[{"name": "Guy"}]')..defaultHeaders = headers;
       final instance = await provider.get<DemoRestModel>();
       expect(instance.first.name, 'Guy');
     });
@@ -65,7 +63,7 @@ void main() {
 
         final instance = DemoRestModel('Guy');
         final query = Query(
-          providerArgs: {
+          providerArgs: const {
             'request': RestRequest(headers: {'Authorization': 'Basic xyz'}, url: '/'),
           },
         );
@@ -79,7 +77,7 @@ void main() {
         final provider = generateProvider('{"name": "Guy"}', requestMethod: 'PUT');
 
         final instance = DemoRestModel('Guy');
-        final query = Query(providerArgs: {'request': RestRequest(method: 'PUT', url: '/')});
+        final query = Query(providerArgs: const {'request': RestRequest(method: 'PUT', url: '/')});
         final resp = await provider.upsert<DemoRestModel>(instance, query: query);
 
         expect(resp!.statusCode, 200);
@@ -90,7 +88,8 @@ void main() {
         final provider = generateProvider('{"name": "Guy"}', requestMethod: 'PATCH');
 
         final instance = DemoRestModel('Guy');
-        final query = Query(providerArgs: {'request': RestRequest(method: 'PATCH', url: '/')});
+        final query =
+            Query(providerArgs: const {'request': RestRequest(method: 'PATCH', url: '/')});
         final resp = await provider.upsert<DemoRestModel>(instance, query: query);
 
         expect(resp!.statusCode, 200);
@@ -105,7 +104,8 @@ void main() {
         );
 
         final instance = DemoRestModel('Guy');
-        final query = Query(providerArgs: {'request': RestRequest(topLevelKey: 'top', url: '/')});
+        final query =
+            Query(providerArgs: const {'request': RestRequest(topLevelKey: 'top', url: '/')});
         final resp = await provider.upsert<DemoRestModel>(instance, query: query);
 
         expect(resp!.statusCode, 200);
@@ -121,7 +121,7 @@ void main() {
           );
 
           final query = Query(
-            providerArgs: {
+            providerArgs: const {
               'request': RestRequest(
                 url: '/',
                 method: 'POST',
@@ -145,7 +145,7 @@ void main() {
 
           final instance = DemoRestModel('Guy');
           final query = Query(
-            providerArgs: {
+            providerArgs: const {
               'request': RestRequest(
                 topLevelKey: 'top',
                 url: '/',

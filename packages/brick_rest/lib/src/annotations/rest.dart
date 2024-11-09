@@ -1,4 +1,6 @@
 import 'package:brick_core/field_serializable.dart';
+import 'package:brick_rest/brick_rest.dart';
+import 'package:brick_rest/src/rest_adapter.dart';
 
 /// An annotation used to specify how a field is serialized for a [RestAdapter].
 /// Heavily inspired by [JsonKey](https://github.com/dart-lang/json_serializable/blob/master/json_annotation/lib/src/json_key.dart)

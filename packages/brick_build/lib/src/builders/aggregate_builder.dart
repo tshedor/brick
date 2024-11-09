@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:brick_build/src/builders/base.dart';
 import 'package:build/build.dart';
 import 'package:glob/glob.dart';
@@ -33,11 +34,10 @@ class AggregateBuilder implements Builder {
   Future<void> build(BuildStep buildStep) async {
     brickLogger.info('Aggregating models and migrations...');
 
-    final imports = <String>{};
-    imports.addAll([
+    final imports = <String>{
       'library big_messy_models_migrations_file;',
-    ]);
-    imports.addAll(requiredImports);
+      ...requiredImports,
+    };
 
     final files = <String>[];
     for (final glob in [migrationFiles, modelFiles]) {

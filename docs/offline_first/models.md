@@ -18,7 +18,7 @@ class MyModel extends OfflineFirstModel {}
 
 ```dart
 @ConnectOfflineFirstWithGraphql(
-  graphqlConfig: GraphqlSerializable(),
+  graphqlConfig: GraphqlSerializable.defaults,
   sqliteConfig: SqliteSerializable(),
 )
 class MyModel extends OfflineFirstModel {}

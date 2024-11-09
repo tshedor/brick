@@ -121,7 +121,7 @@ Complex queries more than one level deep (e.g. with associations) or with compar
 
 ```dart
 @ConnectOfflineFirstWithSupabase(
-  supabaseConfig: SupabaseSerializable(),
+  supabaseConfig: SupabaseSerializable.defaults,
   sqliteConfig: SqliteSerializable(),
 )
 class MyModel extends OfflineFirstWithSupabaseModel {}
