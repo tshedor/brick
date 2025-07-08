@@ -1,6 +1,7 @@
 ## 2.1.0
 
 - Use `SupabaseProvider#subscribeToRealtime` to generate the channel used by `OfflineFirstWithSupabaseRepository#subscribeToRealtime`
+- Swallow `AuthRetryableFetchException` for non-online requests
 - **Breaking Change** protected method `OfflineFirstWithSupabaseRepository#queryToPostgresChangeFilter` has been moved to `SupabaseProvider#queryToPostgresChangeFilter`. Implementations should override this method in `SupabaseProvider` instead.
 
 ## 2.0.0
